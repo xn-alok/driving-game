@@ -1,0 +1,22 @@
+name: Build APK
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Build debug APK
+        run: bash setup.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: car-driving-xn-alok-apk
+          path: dist/car-driving-xn-alok.apk
